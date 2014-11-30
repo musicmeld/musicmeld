@@ -1,0 +1,144 @@
+<html>
+<head>
+<style>
+#album{
+height: 256px;
+width: 256px;
+z-index: -2;
+position:absolute;
+}
+a{
+text-decoration:none;
+font-size:32px;
+background-color:white;
+border-color:black;
+border-radius:8px;
+}
+#left{
+color:green;
+position:absolute;
+}
+#right{
+color:red;
+left: 246px;
+position:absolute;
+}
+#right:hover{
+left: 228px;
+}
+#ambiv{
+position:absolute;
+top:160px;
+left:122px;
+}
+#ambiv:hover{
+top: 144px;
+left:112px;
+}
+#dunno{
+position:absolute;
+top:208px;
+left: 132px;
+}
+#dunno:hover{
+left:128px;
+top: 192px;
+}
+a:hover{
+font-size:64px;
+
+}
+#title{
+position:absolute;
+top: 264px;
+left:64px;
+}
+</style>
+</head>
+<body>
+<img id="album" src="">
+<div id="title"> </div>
+<script>
+function objsize(o){
+var s=0;
+for (i in o){
+s+=1;
+}
+return s;
+}
+function contains(arr,e){
+var j = arr.length
+while (j--){
+if (arr[j]===e){
+return true
+}
+}
+return false;
+}
+var imgs=["nevermind", "melophobia", "OK computer"];
+var songs = {
+nevermind : {1 : "Smells like teen spirit", 2: "in bloom", 3: "Come as you are",
+             4: "Breed", 5: "Lithium", 6: "Polly", 7: "Territorial Pissings", 
+             8: "Drain you", 9: "Lounge act", 10: "Stay away",11: "On a Plain",
+             12: "Something in the rain", "listed" : []  },
+melophobia : {1: "spiderhead", 2: "Come a little closer",3: "telescope", 
+              4: "It's just forever", 5: "Take it or leave it", 6: "Halo",
+              7: "Black widow", 8: "Hypocrite", 9: "teeth",
+              10: "Cigarette Daydreams", "listed" : []} ,
+"OK computer" : {1: "Airbag", 2: "Paranoid Android", 3: "Subterranean homesick Alien",
+                 4: "Exit music (for a film)", 5: "let down",6: "karma police", 
+                 7: "fitter happier", 8: "electioneering", 9: "Climbing up the walls",
+                 10: "no surprises", 11: "Lucky", 12: "the tourist",  "listed" : []}
+
+}
+var num=0; 
+var track=1;
+function next(){
+
+var str= imgs[num] + ".jpg";
+var img = document.getElementById("album");
+img.src=str;
+var title=document.getElementById("title");
+var noloopy=0;
+if (track>objsize(songs[imgs[num]])-1) track=Math.floor(Math.random()*(objsize(songs[imgs[num]])-1)+1)
+if (typeof songs[imgs[num]] !== "undefined"){
+while (contains(songs[imgs[num]]["listed"], track) && noloopy<100){
+track=Math.floor(Math.random()*(objsize(songs[imgs[num]])-1)+1)
+noloopy++;
+}
+title.innerHTML=songs[imgs[num]][track];
+songs[imgs[num]]["listed"].push(track);
+}
+
+num= Math.floor(Math.random()*3);
+
+}
+</script>
+<a href="#" onclick="up();"id=left>/\</a>
+<a href="#" onclick="down();"id=right>\/</a>
+<a href="#" onclick="ambiv();"id=ambiv>&mdash;</a>
+<a href="#" onclick="dunno();"id=dunno>?</a>
+
+<script>
+var i=0;
+function up(){
+i+=1;
+
+next();
+
+}
+function down(){
+i-=1;
+
+next();
+}
+function ambiv(){
+
+}
+function dunno(){
+
+}
+</script>
+
+</body>
+</html>
